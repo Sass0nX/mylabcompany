@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: monitoring
+  namespace: argocd
+
+spec:
+  description: Monitoring applications
+
+  sourceRepos:
+    - https://github.com/Sass0nX/mylabcompany.git
+    - https://grafana.github.io/helm-charts
+
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: monitor
