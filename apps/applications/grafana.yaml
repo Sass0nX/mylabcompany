@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 
 spec:
-  project: monitoring
+  project: default
 
   sources:
     # Helm Chart
