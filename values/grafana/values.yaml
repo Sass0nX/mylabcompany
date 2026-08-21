@@ -46,15 +46,15 @@ grafana.ini:
 envValueFrom:
   GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
     secretKeyRef:
-      name: grafana-oauth
+      name: grafana-oidc
       key: client-secret
 
   GF_SECURITY_ADMIN_USER:
     secretKeyRef:
-      name: grafana-log-credentials
+      name: grafana-admin-credentials
       key: username
 
   GF_SECURITY_ADMIN_PASSWORD:
     secretKeyRef:
-      name: grafana-log-credentials
+      name: grafana-admin-credentials
       key: password
