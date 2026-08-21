@@ -17,3 +17,44 @@ ingress:
 
   hosts:
     - grafana.mylabcompany.com
+
+grafana.ini:
+  server:
+    root_url: https://grafana.mylabcompany.com
+
+  auth.generic_oauth:
+    enabled: true
+    name: Keycloak
+    allow_sign_up: true
+
+    client_id: grafana
+
+    scopes: openid email profile roles
+
+    auth_url: http://10.100.102.25:8080/realms/grafana-lab/protocol/openid-connect/auth
+    token_url: http://95.35.176.174:8080/realms/grafana-lab/protocol/openid-connect/token
+    api_url: http://95.35.176.174:8080/realms/grafana-lab/protocol/openid-connect/userinfo
+
+    login_attribute_path: preferred_username
+    email_attribute_path: email
+
+    role_attribute_path: "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || contains(resource_access.grafana.roles[*], 'viewer') && 'Viewer' || 'None'"
+
+    role_attribute_strict: true
+    skip_org_role_sync: false
+
+envValueFrom:
+  GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+    secretKeyRef:
+      name: grafana-oauth
+      key: client-secret
+
+  GF_SECURITY_ADMIN_USER:
+    secretKeyRef:
+      name: grafana-log-credentials
+      key: username
+
+  GF_SECURITY_ADMIN_PASSWORD:
+    secretKeyRef:
+      name: grafana-log-credentials
+      key: password
