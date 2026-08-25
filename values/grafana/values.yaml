@@ -21,7 +21,7 @@ ingress:
 
 grafana.ini:
   server:
-    root_url: https://grafana.maorcloud.com
+    root_url: http://grafana.maorcloud.com
 
   auth.generic_oauth:
     enabled: true
