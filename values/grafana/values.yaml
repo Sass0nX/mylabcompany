@@ -17,7 +17,7 @@ ingress:
     alb.ingress.kubernetes.io/healthcheck-path: /api/health
 
   hosts:
-    - grafana.mylabcompany.com
+    - grafana.maorcloud.com
 
 grafana.ini:
   server:
