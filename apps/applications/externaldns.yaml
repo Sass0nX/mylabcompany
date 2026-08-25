@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: externaldns
+  namespace: argocd
+
+spec:
+  project: default
+
+  sources:
+    # Helm Chart
+    - repoURL: https://kubernetes-sigs.github.io/external-dns/
+      chart: external-dns
+      targetRevision: "1.21.1"
+
+      helm:
+        valueFiles:
+          - $values/values/externaldns/values.yaml
+
+    # ה-GitOps repository שלנו
+    - repoURL: https://github.com/Sass0nX/mylabcompany.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
