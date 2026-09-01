@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 893089245803.dkr.ecr.eu-central-1.amazonaws.com/docker-images
-  tag: latest
+  tag: 99fc3772667977943c03ec4d792466825491476e
   pullPolicy: IfNotPresent
 
 service:
