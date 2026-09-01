@@ -1,0 +1,14 @@
+replicaCount: 2
+
+image:
+  repository: 893089245803.dkr.ecr.eu-central-1.amazonaws.com/docker-images
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: frontend.mylabcompany.com
