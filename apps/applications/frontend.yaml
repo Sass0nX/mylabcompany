@@ -4,12 +4,12 @@ kind: Application
 metadata:
   name: frontend
   namespace: argocd
-
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
   sources:
-    # Helm Chart מתוך Git
     - repoURL: https://github.com/Sass0nX/mylabcompany.git
       targetRevision: main
       path: charts/frontend
@@ -18,7 +18,6 @@ spec:
         valueFiles:
           - $values/values/frontend/values.yaml
 
-    # Values source
     - repoURL: https://github.com/Sass0nX/mylabcompany.git
       targetRevision: main
       ref: values
