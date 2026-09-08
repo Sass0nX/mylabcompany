@@ -6,19 +6,10 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kafka
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: external-dns
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: frontend
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: external-secret
+
