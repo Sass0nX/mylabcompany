@@ -1,6 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-
 metadata:
   name: grafana
   namespace: argocd
@@ -8,26 +7,19 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-
   sources:
-    # Helm Chart
     - repoURL: https://grafana.github.io/helm-charts
       chart: grafana
       targetRevision: "10.5.15"
-
       helm:
         valueFiles:
           - $values/values/grafana/values.yaml
-
-    # ה-GitOps repository שלנו
     - repoURL: https://github.com/Sass0nX/mylabcompany.git
       targetRevision: main
       ref: values
-
   destination:
     server: https://kubernetes.default.svc
     namespace: monitor
-
   syncPolicy:
     automated:
       prune: true
