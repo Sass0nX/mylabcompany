@@ -19,30 +19,30 @@ ingress:
   hosts:
     - grafana.maorcloud.com
 
-grafana.ini:
-  server:
-    root_url: http://grafana.maorcloud.com
+#grafana.ini:
+#  server:
+#    root_url: http://grafana.maorcloud.com
 
-  auth.generic_oauth:
-    enabled: true
-    name: Keycloak
-    allow_sign_up: true
+#  auth.generic_oauth:
+#    enabled: true
+#    name: Keycloak
+#    allow_sign_up: true
 
-    client_id: grafana
+#    client_id: grafana
 
-    scopes: openid email profile roles
+#    scopes: openid email profile roles
 
-    auth_url: http://10.100.102.25:8080/realms/grafana-lab/protocol/openid-connect/auth
-    token_url: http://85.65.234.196:8080/realms/grafana-lab/protocol/openid-connect/token
-    api_url: http://85.65.234.196:8080/realms/grafana-lab/protocol/openid-connect/userinfo
+#    auth_url: http://10.100.102.25:8080/realms/grafana-lab/protocol/openid-connect/auth
+#    token_url: http://85.65.234.196:8080/realms/grafana-lab/protocol/openid-connect/token
+#    api_url: http://85.65.234.196:8080/realms/grafana-lab/protocol/openid-connect/userinfo
 
-    login_attribute_path: preferred_username
-    email_attribute_path: email
+#    login_attribute_path: preferred_username
+#    email_attribute_path: email
 
-    role_attribute_path: "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || contains(resource_access.grafana.roles[*], 'viewer') && 'Viewer' || 'None'"
+#    role_attribute_path: "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || contains(resource_access.grafana.roles[*], 'viewer') && 'Viewer' || 'None'"
 
-    role_attribute_strict: true
-    skip_org_role_sync: false
+#    role_attribute_strict: true
+#    skip_org_role_sync: false
 
 envValueFrom:
   GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
@@ -59,3 +59,19 @@ envValueFrom:
     secretKeyRef:
       name: grafana-credentials
       key: password
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        uid: prometheus
+        access: proxy
+
+        url: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+
+        isDefault: true
+
+        editable: true
