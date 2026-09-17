@@ -70,7 +70,7 @@ datasources:
         uid: prometheus
         access: proxy
 
-        url: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+        url: http://prometheus-kube-prometheus-prometheus.monitor.svc.cluster.local:9090
 
         isDefault: true
 
