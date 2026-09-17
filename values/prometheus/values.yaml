@@ -1,0 +1,28 @@
+# values/prometheus/values.yaml
+
+grafana:
+  enabled: false
+
+prometheus:
+  enabled: true
+
+  prometheusSpec:
+    retention: 7d
+
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+
+  ingress:
+    enabled: false
+
+alertmanager:
+  enabled: true
+
+  ingress:
+    enabled: false
+
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
